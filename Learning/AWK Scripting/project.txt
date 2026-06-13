@@ -1,0 +1,10 @@
+Using AWK get total number of empolyees and total of salaries and average of salaries
+
+#!/bin/bash
+n=$1
+if [[ $# -ne 1 ]]
+then 
+     echo "enter the file name after ${0} [File-Name]"
+else
+    awk '$NR>1 {if($NF>0)c++; s+=$NF}  END{print "Total Empoyees: "c, "\nTotal Sum of Salaries: "s, "Average of Salaries:"s/c }' $n
+fi

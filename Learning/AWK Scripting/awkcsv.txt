@@ -1,0 +1,29 @@
+awk for csv file:
+             aws -F, '{print$2}' rec.csv     # -F tell which is seperation delimeter
+-only print whose salary more than 50000
+             aws -F, 'NF>50000 {print $0}' rec.
+-to deal with multi-delimeter:
+             aws -F[,:-]  '{print $0}' multi.txt
+-to check only one value from bydefault output like systemctl status:
+             systemctl status ssh | awk 'NR==3 {print$0}'       #it will show only active status
+-print list o files:
+             ls -lt | awk 'NR>1 {print $NF}'
+             ls -lt | awk 'NR>1 {print $9}'                  #same result NR>1 mean ignore 1st row
+
+-read logs in range of time: 
+            sudo less/var/log/syslog |awk -F[T:] '$3>="10" && $3<="11"'   #it will show only between 10 and 11 0 clock
+
+-get fill only with specific month:
+            ls -lt | awk '$6=="Jun"'
+
+
+-bulit-in function of awk:
+         -replace a word: gsub()
+                       awk '{gsub("raees","Iblu) print $0}' rec.txt   #this wil change raees to iblu but not save
+         -length of a line: length()
+                       awk '{print length($1)}' rec.txt               #this will print length of words in that column
+         -index of a word in line: index()
+                       awk '/raees/{print NR, index($0, "raees")}' rec.txt  # it will tell the index of a char in a line
+         -to print in uppercase/lowercase: tolower() , toupper()
+                       awk '{print toupper($5)}' rec.txt
+        

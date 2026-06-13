@@ -1,0 +1,87 @@
+awk scripting:
+               awk 
+                   'BEGIN{start-action}                      #action before file read
+                          pattern/condition{action}
+                    END{stop-action}'                        #action after file read
+                    filename
+ex:    
+awk 'BEGIN{print"-------welcome-------"} {print$0} END{print-----go now-----}' rec.txt
+
+we can use programing concepts in it:
+       -variables
+       -if/else
+       -array
+       -for loop
+       -while loop
+       -functions
+
+-find sum of salary: 
+          awk 'BEGIN{sum=0} {sum=sum+$NF} END{print "sum of salary: "sum}' rec.txt    
+                                                # it will read all the lines one by one and sum the total salary
+-total numbers of empolyees and remove header and average of salary:
+          awk '$NR>1 {if($NF>0)c++; sum+=$NF} END{print "Total Empolyees are:" c, "Total salaries:" sum, "average of salary: sum/c"}' rec.txt 
+-show if the salary is larger then 1000:
+          awk '{if($NF>100)$7="HIGH"; print$0}' rec.txt
+-show total salary of a department:
+          awk '{if($3=="HR"s+=$NF)} END{print "Total salry of HR dep is: "s}' rec.
+
+
+
+-we can also make a file.awk:
+
+ make a file: test.awk
+                BEGIN{ print "------WELCOME------"
+
+                     }
+                     {
+                        if($NF>1000)
+                            $7=="High"
+                        else
+                            $7=="Low"
+                        print $0
+                     }
+                END { print "----END----"
+
+                    }
+
+use that pattern in terminal: awk -f test.awk rec.txt        #it will do the same way but geting pattern from a file.awk
+
+- use awk as a script: 
+#!/bin/awk -f
+BEGIN{start action}
+pattern/condition{action}
+END{stop action}
+
+use this for a  file:  ./file.awk [filename].txt
+
+#array 
+in begin:  arr[0]=1
+           arr[1]=2
+           arr[2]=3
+           marks["English"] =30
+           marks["math"]=40
+
+in end:    print arr[1]
+
+#functions
+make before begin: 
+function add(x,y){
+    print x+y
+}
+
+call anywhere add(1,2)
+
+#for loop
+for(subject in marks)
+   print "Marks of " subject, marks[subject]
+
+for(i=0;i<10;i++)
+print i
+print "raees"
+
+#while loop
+c=1
+while(c<10){
+    print c
+    c++
+}

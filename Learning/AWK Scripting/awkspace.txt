@@ -1,0 +1,45 @@
+AWK : test procesing tool or 
+      domain specific programming language
+
+systax: awk options 'pattern{action}' filename
+        echo "hello" | awk options 'pattern{action}'
+        options: -F: field separator
+                 -V: var=value
+                 -f: file
+
+how it works:   it scan each line and each field separated by space
+       f1 f2 f3
+    r1     
+    r2
+    r3
+    
+terms:  NR - no of rows
+        NF - no of fileds
+        $0 - print everything
+        $1,$2 - field number
+        
+example data: 
+id fname lname desig dept salary
+101 raees ahamd manager loan 60000
+102 ibtu sibtu accountant account 50000
+
+
+-to get only list of first name from data:
+              awk '{print $2}' rec.txt         
+-to print last column:
+              awk '{print $NF}' rec.txt
+-to search a word:
+              awk '/ibtu/{print $0}' rec.txt
+   multi word awk '/ibtu|ahmad/{print $0}' rec.txt
+-to apply line number:
+              awk '{print NR, $0}' rec.txt
+-to print specific line data:
+              awk 'NR==7{print NR, $0}' rec.txt
+-to print a range:
+              awk 'NR==3,NR==6 {print NR, $0}' rec.txt
+-to check empty line:
+              awk 'NF==0 {print NR, $0}' rec.txt
+-to ignore casesensitive: we have to use a flag: (in ubuntu you have to install gawk for use this)
+              awk 'BEGIN{IGNORECASE=1} /RAEES/ {print NR, $0}' srec.txt
+-to check a given char is present in a column:
+              awk '$2 ~ /a/ {print $0}' rec.txt
