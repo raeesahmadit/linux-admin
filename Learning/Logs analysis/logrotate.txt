@@ -1,0 +1,31 @@
+logRotate (linux utility tool to log managment): 
+    is a built-in Linux system utility that automatically archives, compresses 
+    and delete old log files to prevent them from exhausting local disk space, but not continously check
+
+      install: sudo apt install logrotate
+
+ -auto logs generate with dates to see how this work:
+        config files:
+           /etc/logrotate.conf
+           /etc/logrotate.d/
+
+- to perform a logRotate:
+    make a file in /etc/logrotate.d/f1
+    open /etc/logrotate.d/f1
+        
+  ->in f1: 
+    location of that .log file:    /home/ibcent/Desktop/*.log{
+                                       daily
+                                       size 10M
+                                       olddir /home/ibcent/Desktop/archives/    #to store old data after compression
+                                       compress
+                                                        }
+
+-to manually run:
+                 logrotate /etc/logrotate.conf
+
+-to check when it will run automatically: 
+                 systemctl status logrotate.timer
+
+-it can also use cron job to check it:
+                 cd /etc/cron.daily/
