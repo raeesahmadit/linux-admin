@@ -1,0 +1,34 @@
+proxy: in computer network, a proxy server is a server app that acts as an intermediary b/w a 
+       client requesting a resource and server providing that resource
+
+      clint  ------------ proxy ------------- server
+  (forward proxy)                          (reverse proxy)
+
+
+reverse proxy: a service which takes a client request, passes it on to one or more servers
+               proxying is used to distribute the load amoung serversl servers, seamlessly show content from diff websites
+               or pass requests for processing to app servers over protocols other than HTTP
+
+performe:
+   start both apache-httpd and nginx, if error than change the port number of apache-httpd to 8080 from 80
+
+change in conf:
+               Config Location:/etc/nginx/nginx.conf
+               location/some/path/ {
+                     proxy_pass http://www.example.com/link/;
+               }
+               
+               location / {
+                   proxy_pass http://127.0.0.1:8080/;
+               }
+
+logs:  
+      /var/log/nginx/
+      sudo cat /var/log/audit/audit.log | grep nginx | grep denied
+
+
+list of all httpd Selinux boolean: 
+          getsebool -a | grep httpd
+enable the network connect boolean:
+          setsebool httpd_can_network_connect on -P
+          
