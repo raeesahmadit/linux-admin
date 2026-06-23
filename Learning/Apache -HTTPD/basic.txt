@@ -1,0 +1,15 @@
+HTTP Daemon : is a software that runs in the bg of a web server and wait for incoming server requests
+             daemon answer request automatically and serves the hypertext and multimedia doc over the internet using HTTP
+
+install: yum install httpd
+
+config location: 
+               /etc/httpd/conf/httpd.conf
+               /var/www/html/index.html (you need to add this file)
+
+logs:   log var/log/httpd
+
+start service: systemctl start httpd 
+
+make a index.html file which can be acces from outside by using ip of that server
+and if not working try after stop the firewalld service 
